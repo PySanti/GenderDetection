@@ -1,6 +1,10 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 import pandas as pd
+from tensorflow.keras import models
+from tensorflow.keras import layers
+from utils.plot_precision_performance import plot_precision_performance
+from utils.plot_recall_performance import plot_recall_performance
 
 data_folder = "./converted_data/"
 dimensions = (160,160)
@@ -10,3 +14,22 @@ X_train, X_val, Y_train, Y_val = train_test_split(X_data, Y_data, test_size=0.3,
 X_test, X_val, Y_test, Y_val = train_test_split(X_val, Y_val, test_size=0.5, stratify=Y_val, random_state=42)
 
 
+net = models.Sequential()
+net.add(layers.Dense(300, activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(200, activation="relu"))
+net.add(layers.Dense(100, activation="relu"))
+net.add(layers.Dense(50, activation="relu"))
+net.add(layers.Dense(20, activation="relu"))
+net.add(layers.Dense(10, activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=20,
+    validation_data=[X_val, Y_val]
+)
+
+plot_recall_performance(history)
+plot_precision_performance(history)

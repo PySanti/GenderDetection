@@ -2,7 +2,12 @@
 
 El objetivo de este proyecto será crear una red neuronal capaz de identificar el género de una persona.
 
-Se utilizarán dos datasets: [dataset1](https://www.kaggle.com/datasets/vishesh1412/celebrity-face-image-dataset), [dataset2](https://www.kaggle.com/datasets/ashwingupta3012/male-and-female-faces-dataset).
+Se utilizarán los siguientes datasets
+
+* [dataset1](https://www.kaggle.com/datasets/vishesh1412/celebrity-face-image-dataset)
+* [dataset2](https://www.kaggle.com/datasets/ashwingupta3012/male-and-female-faces-dataset)
+* [dataset3](https://www.kaggle.com/datasets/trainingdatapro/gender-detection-and-classification-image-dataset)
+* [dataset4](https://www.kaggle.com/datasets/snmahsa/human-images-dataset-men-and-women)
 
 La arquitectura a utilizar en la red será una **fully-connected network tipo MLP**. Se utilizará `ReLu` como función de activación en las *hidden layers* y `Sigmoid` en la neurona del *output layer*, ya que es un problema de clasificación binaria.
 

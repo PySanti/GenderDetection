@@ -65,6 +65,8 @@ X_test, X_val, Y_test, Y_val = train_test_split(X_val, Y_val, test_size=0.5, str
 
 ## Entrenamiento
 
+### Test 1
+
 Luego, en el proceso de entrenamiento, empezamos con la siguiente arquitectura:
 
 
@@ -91,5 +93,32 @@ Obtuvimos los siguientes resultados:
 
 ![Imagen1](./performance_images/test1/recall_performance.png)
 ![Imagen1](./performance_images/test1/precision_performance.png)
+
+### Test 2
+
+En el segundo test, probamos con la siguiente configuracion
+
+```
+net = models.Sequential()
+net.add(layers.Dense(300, activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(100, activation="relu"))
+net.add(layers.Dense(50, activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer="adam", metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=20,
+    validation_data=[X_val, Y_val]
+)
+```
+
+Reduciendo la cantidad de neuronas y capas y cambiando a la funcion de optimizacion `adam`
+
+![Imagen1](./performance_images/test2/recall_performance.png)
+![Imagen1](./performance_images/test2/precision_performance.png)
+
+
 
 ## Evaluacion

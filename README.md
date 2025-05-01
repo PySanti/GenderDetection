@@ -27,10 +27,6 @@ def resize_image(image, dimensions):
     image = cv2.resize(image, dimensions, interpolation=cv2.INTER_AREA)
     return image
 
-
-
-
-
 def convert_images(folder_path, dimensions):
     X_data = []
     Y_data = []
@@ -46,12 +42,28 @@ def convert_images(folder_path, dimensions):
             X_data.append(vector)
             Y_data.append(target)
     return [np.array(X_data), np.array(Y_data)]
-
 ```
 
 Se cargan las imagenes, se ajustan todas a las mismas dimensiones, se aplanan y por ultimo se normalizan los valores.
 
+Luego se cargan los datos de la siguiente manera:
+
+
+```
+import numpy as np
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+data_folder = "./converted_data/"
+dimensions = (160,160)
+
+[X_data, Y_data] = [np.load(f"{data_folder}/x_data.npy"), np.load(f"{data_folder}/y_data.npy")]
+X_train, X_val, Y_train, Y_val = train_test_split(X_data, Y_data, test_size=0.3, stratify=Y_data, random_state=42)
+X_test, X_val, Y_test, Y_val = train_test_split(X_val, Y_val, test_size=0.5, stratify=Y_val, random_state=42)
+```
+
 
 ## Entrenamiento
+
 
 ## Evaluacion

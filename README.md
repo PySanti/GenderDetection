@@ -2,8 +2,7 @@
 
 El objetivo de este proyecto será crear una red neuronal capaz de identificar el género de una persona.
 
-Se utilizará un [dataset](https://www.kaggle.com/datasets/vishesh1412/celebrity-face-image-dataset)
- que contiene imágenes de famosos hombres y mujeres.
+Se utilizarán dos datasets: [dataset1](https://www.kaggle.com/datasets/vishesh1412/celebrity-face-image-dataset), [dataset2](https://www.kaggle.com/datasets/ashwingupta3012/male-and-female-faces-dataset).
 
 La arquitectura a utilizar en la red será una **fully-connected network tipo MLP**. Se utilizará `ReLu` como función de activación en las *hidden layers* y `Sigmoid` en la neurona del *output layer*, ya que es un problema de clasificación binaria.
 
@@ -13,6 +12,45 @@ La cantidad de neuronas, capas y épocas se irá definiendo a medida que probemo
 ## Preprocesamiento
 
 El primer paso del ejercicio fue transformar las imágenes a una representación vectorial para poder ser consumidas por la red.
+
+Para ello utilizamos las siguientes funciones:
+
+```
+import cv2
+from os import listdir
+from numpy.__config__ import show
+from .resize_image import resize_image
+import numpy as np
+from .show_image import show_image
+
+def resize_image(image, dimensions):
+    image = cv2.resize(image, dimensions, interpolation=cv2.INTER_AREA)
+    return image
+
+
+
+
+
+def convert_images(folder_path, dimensions):
+    X_data = []
+    Y_data = []
+    for gender in ["male", "female"]:
+        for img in listdir(folder_path+gender):
+            path = f'{folder_path}/{gender}/{img}'
+            print(path)
+            imagen = cv2.imread(path, cv2.IMREAD_COLOR)
+            imagen_rgb = cv2.cvtColor(imagen, cv2.COLOR_BGR2RGB)
+            imagen_rgb = resize_image(imagen_rgb, dimensions)
+            vector = imagen_rgb.flatten().astype("float32") / 255
+            target = 1 if gender=="male" else 0
+            X_data.append(vector)
+            Y_data.append(target)
+    return [np.array(X_data), np.array(Y_data)]
+
+```
+
+Se cargan las imagenes, se ajustan todas a las mismas dimensiones, se aplanan y por ultimo se normalizan los valores.
+
 
 ## Entrenamiento
 

@@ -1,6 +1,7 @@
-import matplotlib.pyplot as plt
 import numpy as np
-from utils.convert_images import convert_images
 
+data_folder = "./converted_data/"
+dimensions = (160,160)
 
-[X_data, Y_data] = convert_images(folder_path="./dataset/", dimensions=(160,160))
+[X_data, Y_data] = [np.load(f"{data_folder}/x_data.npy"), np.load(f"{data_folder}/y_data.npy")]
+

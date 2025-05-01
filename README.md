@@ -119,6 +119,36 @@ Reduciendo la cantidad de neuronas y capas y cambiando a la funcion de optimizac
 ![Imagen1](./performance_images/test2/recall_performance.png)
 ![Imagen1](./performance_images/test2/precision_performance.png)
 
+### Test 3
+
+Utilizando la siguiente configuracion:
+
+```
+net = models.Sequential()
+net.add(layers.Dense(1000, activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(700, activation="relu"))
+net.add(layers.Dense(500, activation="relu"))
+net.add(layers.Dense(300, activation="relu"))
+net.add(layers.Dense(200, activation="relu"))
+net.add(layers.Dense(100, activation="relu"))
+net.add(layers.Dense(50, activation="relu"))
+net.add(layers.Dense(10, activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer="adam", metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=25,
+    validation_data=[X_val, Y_val]
+)
+
+```
+
+Aumentando capas, neuronas y epocas, obtuvimos los siguientes resultados.
+
+![Imagen1](./performance_images/test3/recall_performance.png)
+![Imagen1](./performance_images/test3/precision_performance.png)
 
 
 ## Evaluacion

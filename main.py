@@ -1,4 +1,5 @@
 import numpy as np
+from pandas.core.series import disallow_ndim_indexing
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from tensorflow.keras import models
@@ -10,6 +11,13 @@ from utils.convert_images import convert_images
 data_folder = "./converted_data/"
 dimensions = (160,160)
 
+[X_data, Y_data] = convert_images("./dataset/", dimensions, gray_scale=True)
+np.save("./converted_data/x_data.npy", X_data)
+np.save("./converted_data/y_data.npy", Y_data)
+print(X_data.shape)
+print(Y_data.shape)
+
+"""
 [X_data, Y_data] = [np.load(f"{data_folder}/x_data.npy"), np.load(f"{data_folder}/y_data.npy")]
 X_train, X_val, Y_train, Y_val = train_test_split(X_data, Y_data, test_size=0.2, stratify=Y_data, random_state=42)
 X_test, X_val, Y_test, Y_val = train_test_split(X_val, Y_val, test_size=0.5, stratify=Y_val, random_state=42)
@@ -42,3 +50,4 @@ history = net.fit(
 
 plot_recall_performance(history)
 plot_precision_performance(history)
+"""

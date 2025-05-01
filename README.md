@@ -68,7 +68,7 @@ X_test, X_val, Y_test, Y_val = train_test_split(X_val, Y_val, test_size=0.5, str
 ```
 
 
-## Entrenamiento
+## Entrenamiento/Evaluacion
 
 ### Test 1
 
@@ -156,4 +156,35 @@ Aumentando capas, neuronas y epocas, obtuvimos los siguientes resultados.
 ![Imagen1](./performance_images/test3/precision_performance.png)
 
 
-## Evaluacion
+Luego, decidimos invertir algo de tiempo en aumentar la cantidad de imagenes a utilizar. Ahora contamos con ~9000.
+
+### Test 4
+
+Decidi probar con la misma configuracion del primer test para comparar resultados:
+
+```
+
+net = models.Sequential()
+net.add(layers.Dense(300, activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(200, activation="relu"))
+net.add(layers.Dense(100, activation="relu"))
+net.add(layers.Dense(50, activation="relu"))
+net.add(layers.Dense(20, activation="relu"))
+net.add(layers.Dense(10, activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=20,
+    validation_data=[X_val, Y_val]
+)
+```
+
+Luego, encontramos los siguientes resultados
+
+![Imagen1](./performance_images/test4/recall_performance.png)
+![Imagen1](./performance_images/test4/precision_performance.png)
+
+

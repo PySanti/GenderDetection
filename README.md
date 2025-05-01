@@ -197,3 +197,52 @@ Intentamos nuevamente con la primera configuracion pero esta vez utilizando las 
 
 
 Bastante peores.
+
+
+### Test 6
+
+Probando de nuevo la primera arquitectura, aumentamos la cantidad de ejemplos en el conjunto de validacion, alcanzamos los siguientes resultados:
+
+
+![Imagen1](./performance_images/test6/recall_performance.png)
+![Imagen1](./performance_images/test6/precision_performance.png)
+
+
+### Test 7
+
+Luego, para descartar, quise probar tecnicas de regularizacion:
+
+```
+net = models.Sequential()
+net.add(layers.Dense(300, kernel_regularizer=l2(0.001),  activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(200, kernel_regularizer=l2(0.001), activation="relu"))
+net.add(layers.Dense(100, kernel_regularizer=l2(0.001), activation="relu"))
+net.add(layers.Dense(50, kernel_regularizer=l2(0.001), activation="relu"))
+net.add(layers.Dense(20, kernel_regularizer=l2(0.001), activation="relu"))
+net.add(layers.Dense(10, kernel_regularizer=l2(0.001), activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=20,
+    validation_data=[X_val, Y_val]
+)
+
+```
+
+Obteniendo resultados no muy diferentes:
+
+
+![Imagen1](./performance_images/test7/recall_performance.png)
+![Imagen1](./performance_images/test7/precision_performance.png)
+
+
+
+Las ideas que se me ocurren para mejorar el rendmiento de la red son las siguientes:
+
+* Aumentar la cantidad de ejemplos, en un 300% por lo menos.
+* Implementar tecnicas de seleccion inteligente de capas y neuronas.
+* De igual manera, implementar tecnicas de seleccion de hiperparámetros para la decision de la funcion de activacion en las *hidden layers*, lo mismo para la funcion de optimizacion.
+

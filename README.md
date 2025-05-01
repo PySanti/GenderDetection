@@ -246,3 +246,5 @@ Las ideas que se me ocurren para mejorar el rendmiento de la red son las siguien
 * Implementar tecnicas de seleccion inteligente de capas y neuronas.
 * De igual manera, implementar tecnicas de seleccion de hiperparámetros para la decision de la funcion de activacion en las *hidden layers*, lo mismo para la funcion de optimizacion.
 
+
+No tenemos ni los conocimientos ni el poder computacional para hacer lo anterior, pero lo tendremos en el futuro, y volveremos a este proyecto.

@@ -187,4 +187,13 @@ Luego, encontramos los siguientes resultados
 ![Imagen1](./performance_images/test4/recall_performance.png)
 ![Imagen1](./performance_images/test4/precision_performance.png)
 
+### Test 5
 
+Intentamos nuevamente con la primera configuracion pero esta vez utilizando las imagenes con escala de grises, obtuvimos los siguientes resultados:
+
+
+![Imagen1](./performance_images/test5/recall_performance.png)
+![Imagen1](./performance_images/test5/precision_performance.png)
+
+
+Bastante peores.

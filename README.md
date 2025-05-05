@@ -248,3 +248,32 @@ Las ideas que se me ocurren para mejorar el rendmiento de la red son las siguien
 
 
 No tenemos ni los conocimientos ni el poder computacional para hacer lo anterior, pero lo tendremos en el futuro, y volveremos a este proyecto.
+
+### Test 8
+
+
+Despues de algunos dias, aprendimos que las fluctuaciones de rendimiento que percibimos estan muy relacionadas con el learning rate, utilizando el siguiente codigo percibimos algunas mejorias:
+
+```
+net = models.Sequential()
+net.add(layers.Dense(500,  activation="relu", input_shape=(dimensions[0]*dimensions[1]*3,)))
+net.add(layers.Dense(300, activation="relu"))
+net.add(layers.Dense(200, activation="relu"))
+net.add(layers.Dense(100, activation="relu"))
+net.add(layers.Dense(50, activation="relu"))
+net.add(layers.Dense(20, activation="relu"))
+net.add(layers.Dense(1, activation="sigmoid"))
+
+net.compile(loss="binary_crossentropy", optimizer=optimizers.SGD(learning_rate=0.0001), metrics=["precision", "recall"])
+history = net.fit(
+    X_train,
+    Y_train,
+    epochs=30,
+    validation_data=[X_val, Y_val]
+)
+```
+
+![Imagen1](./performance_images/test8/recall_performance.png)
+![Imagen1](./performance_images/test8/precision_performance.png)
+
+
